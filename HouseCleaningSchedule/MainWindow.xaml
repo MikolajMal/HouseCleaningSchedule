@@ -1,0 +1,22 @@
+﻿<Window x:Class="HouseCleaningSchedule.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HouseCleaningSchedule"
+        xmlns:view="clr-namespace:HouseCleaningSchedule.View"
+        xmlns:viewModel="clr-namespace:HouseCleaningSchedule.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="600" Width="400">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModel:HouseViewModel}">
+            <view:HomeView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RoomViewModel}">
+            <view:RoomView/>
+        </DataTemplate>
+    </Window.Resources>
+    <StackPanel Background="{StaticResource MainBackgroundBrush}">
+        <ContentControl Content="{Binding SelectedViewModel}"/>
+    </StackPanel>
+</Window>
