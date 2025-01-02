@@ -7,4 +7,20 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Images\EditIcon.png" />
+    <None Remove="Images\HomeIcon.png" />
+    <None Remove="Images\HomeIconWhite.png" />
+    <None Remove="Images\Plus.png" />
+    <None Remove="Images\TrashIcon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\EditIcon.png" />
+    <Resource Include="Images\HomeIcon.png" />
+    <Resource Include="Images\HomeIconWhite.png" />
+    <Resource Include="Images\Plus.png" />
+    <Resource Include="Images\TrashIcon.png" />
+  </ItemGroup>
+
 </Project>
