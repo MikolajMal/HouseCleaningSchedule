@@ -7,13 +7,19 @@
         xmlns:view="clr-namespace:HouseCleaningSchedule.View"
         xmlns:viewModel="clr-namespace:HouseCleaningSchedule.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="400">
+        Title="MainWindow" Height="600" Width="420">
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModel:HouseViewModel}">
             <view:HomeView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:RoomViewModel}">
             <view:RoomView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:EditTaskViewModel}">
+            <view:EditTaskView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AddTaskViewModel}">
+            <view:AddTaskView/>
         </DataTemplate>
     </Window.Resources>
     <StackPanel Background="{StaticResource MainBackgroundBrush}">
