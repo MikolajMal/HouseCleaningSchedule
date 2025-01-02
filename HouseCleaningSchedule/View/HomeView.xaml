@@ -11,16 +11,11 @@
             <Button Command="{Binding DataContext.ShowRoomCommand, 
                               RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">
                 <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock FontSize="15" Foreground="{StaticResource TextBrush}" Text="{Binding Name}" Margin="20,2"/>
-                    <TextBlock Grid.Row="1" Foreground="{StaticResource SecondaryTextBrush}" Text="{Binding Name}" Margin="20,2"/>
+                    <TextBlock FontSize="18" Foreground="{StaticResource TextBrush}" Text="{Binding Name}" Margin="20,2"/>
                     <TextBlock Grid.Column="1" Grid.RowSpan="2" Foreground="{StaticResource SecondaryTextBrush}" Text="Percentage" TextAlignment="Right" VerticalAlignment="Center" Margin="20,5"/>
                 </Grid>
             </Button>

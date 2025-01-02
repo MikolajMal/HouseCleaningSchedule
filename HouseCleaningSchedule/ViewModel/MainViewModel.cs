@@ -2,11 +2,6 @@
 using HouseCleaningSchedule.Data;
 using HouseCleaningSchedule.Model;
 using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HouseCleaningSchedule.ViewModel
 {
@@ -25,17 +20,22 @@ namespace HouseCleaningSchedule.ViewModel
 			}
 		}
 
-		public HouseViewModel houseViewModel { get; }
-		RoomViewModel roomViewModel { get; set; }
+		HouseViewModel HouseViewModel { get; }
+		RoomViewModel RoomViewModel { get; set; }
+		EditTaskViewModel EditTaskViewModel { get; }
 
 		public MainViewModel(IHouseRepository houseRepository, HouseViewModel houseVM)
 		{
 			HouseRepository = houseRepository;
-			houseViewModel = houseVM;
-			SelectedViewModel = houseViewModel;
+			HouseViewModel = houseVM;
+			SelectedViewModel = HouseViewModel;
 			SelectedViewModel.LoadAsync();
 
 			ShowRoomCommand = new DelegateCommand(ShowRoom);
+			ShowHomeCommand = new DelegateCommand(ShowHome);
+
+			AddNewTaskCommand = new DelegateCommand(AddNewTask);
+			EditTaskCommand = new DelegateCommand(EditTask);
 		}
 
 		public DelegateCommand ShowRoomCommand { get; private set; }
@@ -43,9 +43,52 @@ namespace HouseCleaningSchedule.ViewModel
 		{
 			if (parameter is Room selectedRoom)
 			{
-				roomViewModel = new RoomViewModel(selectedRoom);
-				SelectedViewModel = roomViewModel;
+				RoomViewModel ??= new RoomViewModel(selectedRoom);
+				RoomViewModel.Room = selectedRoom;
+				SelectedViewModel = RoomViewModel;
 			}
+		}
+
+		public DelegateCommand ShowHomeCommand { get; private set; }
+		private void ShowHome(object? parameter)
+		{
+			SelectedViewModel = HouseViewModel;
+		}
+
+		public DelegateCommand AddNewTaskCommand { get; private set; }
+		void AddNewTask(object? parameter)
+		{
+			AddTaskViewModel addTaskViewModel = new AddTaskViewModel();
+			SelectedViewModel = addTaskViewModel;
+
+			addTaskViewModel.TaskOperationFinished += OnTaskCreatFinished;
+		}
+
+		private void OnTaskCreatFinished(object? sender, AddTaskViewModel.TaskEventArgs e)
+		{
+			if (e.CleaningTask != null)
+			{
+				RoomViewModel.CleaningTasks.Add(e.CleaningTask);
+			}
+
+			SelectedViewModel = RoomViewModel;
+		}
+
+		public DelegateCommand EditTaskCommand { get; private set; }
+		void EditTask(object? parameter)
+		{
+			if (parameter != null)
+			{
+				EditTaskViewModel editTaskViewModel = new EditTaskViewModel(parameter);
+				SelectedViewModel = editTaskViewModel;
+
+				editTaskViewModel.TaskOperationFinished += OnTaskEditFinished;
+			}
+		}
+
+		void OnTaskEditFinished(object? sender, EventArgs e)
+		{
+			SelectedViewModel = RoomViewModel;
 		}
 	}
 }

@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="HouseCleaningSchedule.View.AddTaskView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converter="clr-namespace:HouseCleaningSchedule.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="400">
+    <UserControl.Resources>
+        <converter:StrintToIntConverter x:Key="StringToIntConverter"/>
+    </UserControl.Resources>
+    <Grid Width="250" Margin="50">
+        <Border CornerRadius="20" BorderThickness="2" BorderBrush="{StaticResource BorderColorBrush}"  Background="{StaticResource MainBackgroundBrush}">
+            <StackPanel>
+                <TextBlock Text="Crete new task" HorizontalAlignment="Center" FontSize="18" Margin="12"/>
+                <TextBlock Text="Name:"/>
+                <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Description:"/>
+                <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Text="Repeatability:"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Every"/>
+                    <TextBox Text="{Binding Repeatability, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToIntConverter}}" Width="50" Margin="0"/>
+                    <TextBlock Text="{Binding Days}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16">
+                    <Button Command="{Binding CreateTaskCommand}" Style="{StaticResource DialogWindowButton}">
+                        <TextBlock Style="{StaticResource DialogWindowButtonTextBlock}" Text="CREATE"/>
+                    </Button>
+                    <Button Command="{Binding CancelCommand}" Style="{StaticResource DialogWindowButton}">
+                        <TextBlock Style="{StaticResource DialogWindowButtonTextBlock}" Text="CANCEL"/>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

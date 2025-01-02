@@ -1,32 +1,63 @@
-﻿using HouseCleaningSchedule.Data;
+﻿using HouseCleaningSchedule.Command;
 using HouseCleaningSchedule.Model;
-using System;
-using System.Collections.Generic;
+using HouseCleaningSchedule.View;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 namespace HouseCleaningSchedule.ViewModel
 {
 	public class RoomViewModel : ViewModelBase
 	{
-		Room? Room { get; }
-		public ObservableCollection<CleaningTask> CleaningTasks { get; private set; }
+		Room? room;
+		public Room? Room
+		{
+			get => room;
+			set
+			{
+				if(room != value && value != null)
+				{
+					room = value;
+					CleaningTasks = new ObservableCollection<CleaningTask>(room.CleaningTasks);
+				}
+			}
+		}
+
+		CleaningTask? selectedTask = null;
+		public CleaningTask? SelectedTask
+		{
+			get => selectedTask;
+			set
+			{
+				if(selectedTask != value)
+				{
+					selectedTask = value;
+					OnPropertyChanged();
+					DeleteTaskCommand.RaiseCanExecuteChanged();
+				}
+			}
+		}
+
+		public ObservableCollection<CleaningTask> CleaningTasks { get; private set; } = new();
 
 		public RoomViewModel(Room room)
 		{
 			Room = room;
 
-			CleaningTasks = new ObservableCollection<CleaningTask>(Room.CleaningTasks);
+			DeleteTaskCommand = new DelegateCommand(DeleteTask, o => SelectedTask != null);
 		}
 
-		public override async Task LoadAsync()
+		public DelegateCommand DeleteTaskCommand { get; private set; }
+		void DeleteTask(object? parameter)
 		{
-			if (CleaningTasks.Count > 0) return;
-
-			//var cleaningTasks = await HouseRepository
-			// TODO: pass argument with room id
+			if (SelectedTask == null) return;
+			CleaningTasks.Remove(SelectedTask);
+			SelectedTask = null;
 		}
+
+		//public override async Task LoadAsync()
+		//{
+		//	if (CleaningTasks.Count > 0) return;
+		//}
 	}
 }
