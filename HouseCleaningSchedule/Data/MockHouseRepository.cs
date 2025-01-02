@@ -30,7 +30,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.5f,
 									IsCompleted = false,
 									Description = "Sort clothes and and empty laundry container",
-									Repeatability = "Every 4 days"
+									Repeatability = 4
 								},
 								new CleaningTask
 								{
@@ -39,7 +39,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.8f,
 									IsCompleted = false,
 									Description = "Regular vacuuming",
-									Repeatability = "Every 5 days"
+									Repeatability = 5
 								},
 								new CleaningTask
 								{
@@ -48,7 +48,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.4f,
 									IsCompleted = false,
 									Description = "Every mirror in bathroom",
-									Repeatability = "Every 7 days"
+									Repeatability = 7
 								},
 								new CleaningTask
 								{
@@ -57,7 +57,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.5f,
 									IsCompleted = false,
 									Description = "Inside and outside",
-									Repeatability = "Every 7 days"
+									Repeatability = 7
 								}
 							}
 						},
@@ -76,7 +76,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.2f,
 									IsCompleted = false,
 									Description = "Empty every container",
-									Repeatability = "Every 4 days"
+									Repeatability = 4
 								},
 								new CleaningTask
 								{
@@ -85,7 +85,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.8f,
 									IsCompleted = false,
 									Description = "Regular vacuuming",
-									Repeatability = "Every 5 days"
+									Repeatability = 5
 								},
 								new CleaningTask
 								{
@@ -94,7 +94,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.4f,
 									IsCompleted = false,
 									Description = "With appropriate cleaning agents",
-									Repeatability = "Every 7 days"
+									Repeatability = 7
 								},
 								new CleaningTask
 								{
@@ -103,7 +103,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.6f,
 									IsCompleted = false,
 									Description = "With a brush and a mop",
-									Repeatability = "Every 7 days"
+									Repeatability = 7
 								}
 							}
 						},
@@ -122,7 +122,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.6f,
 									IsCompleted = false,
 									Description = "Refresh and dust",
-									Repeatability = "Every 7 days"
+									Repeatability = 7
 								},
 								new CleaningTask
 								{
@@ -131,7 +131,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.8f,
 									IsCompleted = false,
 									Description = "Regular vacuuming",
-									Repeatability = "Every 5 days"
+									Repeatability = 5
 								},
 								new CleaningTask
 								{
@@ -140,7 +140,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 0.4f,
 									IsCompleted = false,
 									Description = "Every mirror in bathroom",
-									Repeatability = "Every 7 days"
+									Repeatability = 7
 								},
 								new CleaningTask
 								{
@@ -149,7 +149,7 @@ namespace HouseCleaningSchedule.Data
 									EstimatedCompletionTime = 1f,
 									IsCompleted = false,
 									Description = "Furnitures and electronics",
-									Repeatability = "Every 7 days"
+									Repeatability = 7
 								}
 							}
 						}
