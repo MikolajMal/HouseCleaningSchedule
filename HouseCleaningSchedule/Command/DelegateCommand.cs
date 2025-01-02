@@ -18,6 +18,8 @@ namespace HouseCleaningSchedule.Command
 			this.canExecute = canExecute;
 		}
 
+		public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+
 		public event EventHandler? CanExecuteChanged;
 
 		public bool CanExecute(object? parameter) => canExecute is null || canExecute(parameter);
