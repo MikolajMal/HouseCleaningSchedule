@@ -8,4 +8,8 @@
     <!--Text colors-->
     <SolidColorBrush x:Key="TextBrush" Color="#EDEAEA"/>
     <SolidColorBrush x:Key="SecondaryTextBrush" Color="#7D7D7D"/>
+    
+    <!--Checkbox-->
+    <SolidColorBrush x:Key="CheckedBrush" Color="#029FDC"/>
+    <SolidColorBrush x:Key="PressedBrush" Color="#0280B0"/>
 </ResourceDictionary>

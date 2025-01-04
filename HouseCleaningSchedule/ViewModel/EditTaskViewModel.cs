@@ -20,7 +20,7 @@ namespace HouseCleaningSchedule.ViewModel
 					AddError("Name is required");
 				else ClearErrors();
 
-				EditTaskCommand.RaiseCanExecuteChanged();
+				EditTaskCommand?.RaiseCanExecuteChanged();
 			}
 		}
 
@@ -55,7 +55,7 @@ namespace HouseCleaningSchedule.ViewModel
 					else Days = "days.";
 				}
 
-				EditTaskCommand.RaiseCanExecuteChanged();
+				EditTaskCommand?.RaiseCanExecuteChanged();
 			}
 		}
 

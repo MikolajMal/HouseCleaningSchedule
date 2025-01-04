@@ -35,7 +35,7 @@ namespace HouseCleaningSchedule.ViewModel
 					AddError("Name is required");
 				else ClearErrors();
 
-				CreateTaskCommand.RaiseCanExecuteChanged();
+				CreateTaskCommand?.RaiseCanExecuteChanged();
 			}
 		}
 
@@ -69,7 +69,7 @@ namespace HouseCleaningSchedule.ViewModel
 					if (repeatability == 1) Days = "day.";
 					else Days = "days.";
 				}
-				CreateTaskCommand.RaiseCanExecuteChanged();
+				CreateTaskCommand?.RaiseCanExecuteChanged();
 			}
 		}
 
