@@ -15,6 +15,16 @@ namespace HouseCleaningSchedule.ViewModel
 		public HouseViewModel(IHouseRepository houseRepository)
 		{
 			HouseRepository = houseRepository;
+
+			DeleteRoomCommand = new DelegateCommand(DeleteRoom);
+		}
+
+		public DelegateCommand DeleteRoomCommand { get; private set; }
+		void DeleteRoom(object? parameter)
+		{
+			Room? room = parameter as Room;
+
+			if (room != null) Rooms.Remove(room);
 		}
 
 		public override async Task LoadAsync()

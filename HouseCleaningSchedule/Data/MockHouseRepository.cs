@@ -20,7 +20,7 @@ namespace HouseCleaningSchedule.Data
 							Id = 1,
 							Name = "Bathroom",
 							EstimatedCompletionTime = 0f,
-							PercentageDone = 0,
+							PercentageDone = "0%",
 							CleaningTasks = new List<CleaningTask>
 							{
 								new CleaningTask
@@ -66,7 +66,7 @@ namespace HouseCleaningSchedule.Data
 							Id = 2,
 							Name = "Kitchen",
 							EstimatedCompletionTime = 0f,
-							PercentageDone = 0,
+							PercentageDone = "0%",
 							CleaningTasks = new List<CleaningTask>
 							{
 								new CleaningTask
@@ -112,7 +112,7 @@ namespace HouseCleaningSchedule.Data
 							Id = 3,
 							Name = "Living room",
 							EstimatedCompletionTime = 0f,
-							PercentageDone = 0,
+							PercentageDone = "0%",
 							CleaningTasks = new List<CleaningTask>
 							{
 								new CleaningTask

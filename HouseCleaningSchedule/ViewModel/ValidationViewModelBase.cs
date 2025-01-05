@@ -2,10 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Xml.Linq;
 
 namespace HouseCleaningSchedule.ViewModel
 {
@@ -19,8 +17,6 @@ namespace HouseCleaningSchedule.ViewModel
 		void OnErrorsChanged(DataErrorsChangedEventArgs args)
 		{
 			ErrorsChanged?.Invoke(this, args);
-			Debug.WriteLine("HasErrors:");
-			Debug.WriteLine(HasErrors);
 		}
 
 		public IEnumerable GetErrors(string? propertyName)

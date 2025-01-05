@@ -21,6 +21,9 @@
         <DataTemplate DataType="{x:Type viewModel:AddTaskViewModel}">
             <view:AddTaskView/>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RoomEditorViewModel}">
+            <view:RoomEditorView/>
+        </DataTemplate>
     </Window.Resources>
     <StackPanel Background="{StaticResource MainBackgroundBrush}">
         <ContentControl Content="{Binding SelectedViewModel}"/>

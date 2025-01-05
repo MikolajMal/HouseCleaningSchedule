@@ -22,7 +22,6 @@ namespace HouseCleaningSchedule.ViewModel
 
 		HouseViewModel HouseViewModel { get; }
 		RoomViewModel RoomViewModel { get; set; }
-		EditTaskViewModel EditTaskViewModel { get; }
 
 		public MainViewModel(IHouseRepository houseRepository, HouseViewModel houseVM)
 		{
@@ -33,6 +32,8 @@ namespace HouseCleaningSchedule.ViewModel
 
 			ShowRoomCommand = new DelegateCommand(ShowRoom);
 			ShowHomeCommand = new DelegateCommand(ShowHome);
+
+			OpenRoomEditorCommand = new DelegateCommand(OpenRoomEditor);
 
 			AddNewTaskCommand = new DelegateCommand(AddNewTask);
 			EditTaskCommand = new DelegateCommand(EditTask);
@@ -55,20 +56,38 @@ namespace HouseCleaningSchedule.ViewModel
 			SelectedViewModel = HouseViewModel;
 		}
 
+		public DelegateCommand OpenRoomEditorCommand { get; private set; }
+		void OpenRoomEditor(object? parameter)
+		{
+			Room? room = parameter as Room;
+			RoomEditorViewModel roomEditorViewModel = new RoomEditorViewModel(room);
+			SelectedViewModel = roomEditorViewModel;
+
+			roomEditorViewModel.RoomOperationFinished += OnRoomEditFinished;
+		}
+
+		void OnRoomEditFinished(object? sender, Room? room)
+		{
+			if (room != null) HouseViewModel.Rooms.Add(room);
+
+			SelectedViewModel = HouseViewModel;
+		}
+
 		public DelegateCommand AddNewTaskCommand { get; private set; }
 		void AddNewTask(object? parameter)
 		{
 			AddTaskViewModel addTaskViewModel = new AddTaskViewModel();
 			SelectedViewModel = addTaskViewModel;
 
-			addTaskViewModel.TaskOperationFinished += OnTaskCreatFinished;
+			addTaskViewModel.TaskOperationFinished += OnTaskCreateFinished;
 		}
 
-		private void OnTaskCreatFinished(object? sender, AddTaskViewModel.TaskEventArgs e)
+		private void OnTaskCreateFinished(object? sender, AddTaskViewModel.TaskEventArgs e)
 		{
 			if (e.CleaningTask != null)
 			{
 				RoomViewModel.CleaningTasks.Add(e.CleaningTask);
+				RoomViewModel.UpdatePercentageCommand.Execute(null);
 			}
 
 			SelectedViewModel = RoomViewModel;

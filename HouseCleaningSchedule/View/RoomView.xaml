@@ -18,9 +18,9 @@
                         <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock FontSize="15" Foreground="{StaticResource TextBrush}" Text="{Binding Name}" Margin="20,2"/>
-                    <TextBlock Grid.Row="1" Foreground="{StaticResource SecondaryTextBrush}" Text="{Binding Description}" Margin="20,2"/>
-                    <CheckBox Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="40,2"/>
+                    <TextBlock Text="{Binding Name}" FontSize="15" Foreground="{StaticResource TextBrush}" Margin="20,2"/>
+                    <TextBlock Text="{Binding Description}" Grid.Row="1" Foreground="{StaticResource SecondaryTextBrush}" Margin="20,2"/>
+                    <CheckBox IsChecked="{Binding IsCompleted}" Command="{Binding DataContext.UpdatePercentageCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="40,2"/>
                 </Grid>
 
             </Border>
@@ -31,7 +31,7 @@
             <Grid Height="60">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="3*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Command="{Binding DataContext.ShowHomeCommand, RelativeSource={RelativeSource AncestorType=Window}}" Style="{StaticResource MainButton}" HorizontalAlignment="Left">

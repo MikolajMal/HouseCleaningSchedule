@@ -1,16 +1,13 @@
 ﻿using HouseCleaningSchedule.Command;
 using HouseCleaningSchedule.Model;
-using HouseCleaningSchedule.View;
 using System.Collections.ObjectModel;
-using System.Windows;
-using System.Windows.Media;
 
 namespace HouseCleaningSchedule.ViewModel
 {
 	public class RoomViewModel : ViewModelBase
 	{
-		Room? room;
-		public Room? Room
+		Room room = new();
+		public Room Room
 		{
 			get => room;
 			set
@@ -40,11 +37,22 @@ namespace HouseCleaningSchedule.ViewModel
 
 		public ObservableCollection<CleaningTask> CleaningTasks { get; private set; } = new();
 
+		public string PercentageDone
+		{
+			get => Room.PercentageDone;
+			set
+			{
+				Room.PercentageDone = value + "%";
+			}
+		}
+
+
 		public RoomViewModel(Room room)
 		{
 			Room = room;
 
 			DeleteTaskCommand = new DelegateCommand(DeleteTask, o => SelectedTask != null);
+			UpdatePercentageCommand = new DelegateCommand(UpdatePercentage);
 		}
 
 		public DelegateCommand DeleteTaskCommand { get; private set; }
@@ -53,11 +61,21 @@ namespace HouseCleaningSchedule.ViewModel
 			if (SelectedTask == null) return;
 			CleaningTasks.Remove(SelectedTask);
 			SelectedTask = null;
+
+			UpdatePercentageCommand.Execute(null);
 		}
 
-		//public override async Task LoadAsync()
-		//{
-		//	if (CleaningTasks.Count > 0) return;
-		//}
+		public DelegateCommand UpdatePercentageCommand { get; private set; }
+		void UpdatePercentage(object? parameter)
+		{
+			float completedTaskCount = 0;
+			foreach (CleaningTask cleaningTask in CleaningTasks)
+			{
+				if(cleaningTask.IsCompleted) completedTaskCount++;
+			}
+
+			if (CleaningTasks.Count == 0) PercentageDone = "0";
+			else PercentageDone = ((int)(completedTaskCount / CleaningTasks.Count * 100f)).ToString();
+		}
 	}
 }

@@ -84,11 +84,13 @@ namespace HouseCleaningSchedule.ViewModel
 			CancelEditTaskCommand = new DelegateCommand(CancelEditTask);
 		}
 
-		public EventHandler TaskOperationFinished;
+		public EventHandler? TaskOperationFinished;
 
 		public DelegateCommand EditTaskCommand { get; private set; }
 		void EditTask(object? parameter)
 		{
+			if(cleaningTask== null) return;
+
 			cleaningTask.Name = Name;
 			cleaningTask.Description = Description;
 			cleaningTask.Repeatability = Repeatability;

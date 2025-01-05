@@ -1,17 +1,12 @@
 ﻿using HouseCleaningSchedule.Command;
 using HouseCleaningSchedule.Model;
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HouseCleaningSchedule.ViewModel
 {
 	class AddTaskViewModel : ValidationViewModelBase
 	{
-		public EventHandler<TaskEventArgs> TaskOperationFinished;
+		public EventHandler<TaskEventArgs>? TaskOperationFinished;
 		public class TaskEventArgs : EventArgs
 		{
 			public CleaningTask? CleaningTask { get; }
