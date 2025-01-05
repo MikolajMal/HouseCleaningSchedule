@@ -14,7 +14,7 @@
                 <TextBox Text="{Binding RoomName, UpdateSourceTrigger=PropertyChanged}"/>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16">
                     <Button Command="{Binding ConfirmCommand}" Style="{StaticResource DialogWindowButton}">
-                        <TextBlock Style="{StaticResource DialogWindowButtonTextBlock}" Text="CREATE"/>
+                        <TextBlock Style="{StaticResource DialogWindowButtonTextBlock}" Text="CONFIRM"/>
                     </Button>
                     <Button Command="{Binding CancelCommand}" Style="{StaticResource DialogWindowButton}">
                         <TextBlock Style="{StaticResource DialogWindowButtonTextBlock}" Text="CANCEL"/>

@@ -37,10 +37,13 @@ namespace HouseCleaningSchedule.ViewModel
 			}
 		}
 
+		Room? currentRoom = null;
+
 		public RoomEditorViewModel(Room? room)
 		{
 			if (room != null)
 			{
+				currentRoom = room;
 				ViewTitle = "Edit room";
 				RoomName = room.Name;
 			}
@@ -61,13 +64,23 @@ namespace HouseCleaningSchedule.ViewModel
 		public DelegateCommand ConfirmCommand { get; private set; }
 		void Confirm(object? parameter)
 		{
-			Room room = new Room()
+			if (currentRoom != null)
 			{
-				Name = RoomName,
-				CleaningTasks = new(),
-				PercentageDone = "0%"
-			};
-			RoomOperationFinished?.Invoke(this, room);
+				currentRoom.Name = RoomName;
+				RoomOperationFinished?.Invoke(this, null);
+			}
+			else
+			{
+				Room room = new Room()
+				{
+					Name = RoomName,
+					CleaningTasks = new(),
+					PercentageDone = "0%"
+				};
+				RoomOperationFinished?.Invoke(this, room);
+			}
+
+			currentRoom = null;
 		}
 
 		public DelegateCommand CancelCommand { get; private set; }
