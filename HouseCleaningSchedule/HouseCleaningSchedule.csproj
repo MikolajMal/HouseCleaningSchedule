@@ -16,6 +16,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Images\EditIcon.png" />
     <Resource Include="Images\HomeIcon.png" />
     <Resource Include="Images\HomeIconWhite.png" />

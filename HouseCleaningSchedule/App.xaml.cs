@@ -1,19 +1,39 @@
 ﻿using HouseCleaningSchedule.Data;
 using HouseCleaningSchedule.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
 
 namespace HouseCleaningSchedule
 {
 	public partial class App : Application
 	{
+		readonly ServiceProvider serviceProvider;
+
+		public App()
+		{
+			ServiceCollection services = new ServiceCollection();
+			ConfigureServices(services);
+
+			serviceProvider = services.BuildServiceProvider();
+		}
+
+		private void ConfigureServices(ServiceCollection services)
+		{
+			services.AddTransient<MainWindow>();
+
+			services.AddTransient<MainViewModel>();
+			services.AddTransient<HouseViewModel>();
+
+			services.AddSingleton<IHouseRepository, MockHouseRepository>();
+		}
+
 		protected override void OnStartup(StartupEventArgs e)
 		{
 			base.OnStartup(e);
 
-			IHouseRepository houseRepository = new MockHouseRepository();
-
-			var mainWindow = new MainWindow(new MainViewModel(houseRepository, new HouseViewModel(houseRepository)));
-			mainWindow.Show();
+			var mainWindow = serviceProvider.GetService<MainWindow>();
+			mainWindow?.Show();
 		}
 	}
 }
