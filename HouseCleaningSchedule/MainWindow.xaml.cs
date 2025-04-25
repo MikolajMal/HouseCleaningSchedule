@@ -10,13 +10,11 @@ namespace HouseCleaningSchedule
 	public partial class MainWindow : Window
 	{
 		MainViewModel MainViewModel { get; }
-		public MainWindow()
+		public MainWindow(MainViewModel mainViewModel)
 		{
 			InitializeComponent();
 
-			IHouseRepository houseRepository = new MockHouseRepository();
-
-			MainViewModel = new MainViewModel(houseRepository, new HouseViewModel(houseRepository));
+			MainViewModel = mainViewModel;
 			Loaded += MainWindow_Loaded;
 			DataContext = MainViewModel;
 		}

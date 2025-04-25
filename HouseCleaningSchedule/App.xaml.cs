@@ -1,17 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using HouseCleaningSchedule.Data;
+using HouseCleaningSchedule.ViewModel;
 using System.Windows;
 
 namespace HouseCleaningSchedule
 {
-	/// <summary>
-	/// Interaction logic for App.xaml
-	/// </summary>
 	public partial class App : Application
 	{
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			base.OnStartup(e);
+
+			IHouseRepository houseRepository = new MockHouseRepository();
+
+			var mainWindow = new MainWindow(new MainViewModel(houseRepository, new HouseViewModel(houseRepository)));
+			mainWindow.Show();
+		}
 	}
 }
