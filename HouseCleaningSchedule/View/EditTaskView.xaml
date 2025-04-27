@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <converter:StringToIntConverter x:Key="StringToIntConverter"/>
     </UserControl.Resources>
-    <Grid Width="250" Margin="50">
+    <Grid Width="250" Height="200" Margin="50">
         <Border CornerRadius="20" BorderThickness="2" BorderBrush="{StaticResource BorderColorBrush}"  Background="{StaticResource MainBackgroundBrush}">
             <StackPanel>
                 <TextBlock Text="Edit task" HorizontalAlignment="Center" FontSize="18" Margin="12"/>
@@ -17,12 +17,6 @@
                 <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Text="Description:"/>
                 <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}"/>
-                <TextBlock Text="Repeatability:"/>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Every"/>
-                    <TextBox Text="{Binding Repeatability, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource StringToIntConverter}}" Width="50" Margin="0"/>
-                    <TextBlock Text="{Binding Days}"/>
-                </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="16">
                     <Button Command="{Binding EditTaskCommand}" Style="{StaticResource DialogWindowButton}">
                         <TextBlock Style="{StaticResource DialogWindowButtonTextBlock}" Text="EDIT"/>
