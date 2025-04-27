@@ -4,7 +4,7 @@ using System.Windows.Data;
 
 namespace HouseCleaningSchedule.Converters
 {
-	public class StrintToIntConverter : IValueConverter
+	public class StringToIntConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{

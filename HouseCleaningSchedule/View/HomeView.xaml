@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="400">
     <UserControl.Resources>
-        <converter:StrintToIntConverter x:Key="StringToIntConverter"/>
+        <converter:StringToIntConverter x:Key="StringToIntConverter"/>
         <DataTemplate x:Key="RoomDataTemplate">
             <Button Command="{Binding DataContext.ShowRoomCommand, 
                               RelativeSource={RelativeSource AncestorType=Window}}" CommandParameter="{Binding}">
