@@ -93,7 +93,6 @@ namespace HouseCleaningSchedule.ViewModel
 			CleaningTask cleaningTask = new CleaningTask();
 			cleaningTask.Name = Name;
 			cleaningTask.Description = Description;
-			cleaningTask.Repeatability = Repeatability;
 
 			TaskOperationFinished?.Invoke(this, new TaskEventArgs(cleaningTask));
 		}

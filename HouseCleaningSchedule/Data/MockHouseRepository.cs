@@ -19,7 +19,6 @@ namespace HouseCleaningSchedule.Data
 						{
 							Id = 1,
 							Name = "Bathroom",
-							EstimatedCompletionTime = 0f,
 							PercentageDone = "0%",
 							CleaningTasks = new List<CleaningTask>
 							{
@@ -27,37 +26,29 @@ namespace HouseCleaningSchedule.Data
 								{
 									Id= 1,
 									Name = "Do the laundry",
-									EstimatedCompletionTime = 0.5f,
 									IsCompleted = false,
-									Description = "Sort clothes and and empty laundry container",
-									Repeatability = 4
+									Description = "Sort clothes and and empty laundry container"
 								},
 								new CleaningTask
 								{
 									Id= 2,
 									Name = "Vacuum",
-									EstimatedCompletionTime = 0.8f,
 									IsCompleted = false,
-									Description = "Regular vacuuming",
-									Repeatability = 5
+									Description = "Regular vacuuming"
 								},
 								new CleaningTask
 								{
 									Id= 3,
 									Name = "Wash the mirros",
-									EstimatedCompletionTime = 0.4f,
 									IsCompleted = false,
-									Description = "Every mirror in bathroom",
-									Repeatability = 7
+									Description = "Every mirror in bathroom"
 								},
 								new CleaningTask
 								{
 									Id= 4,
 									Name = "Wash the toilet",
-									EstimatedCompletionTime = 0.5f,
 									IsCompleted = false,
-									Description = "Inside and outside",
-									Repeatability = 7
+									Description = "Inside and outside"
 								}
 							}
 						},
@@ -65,7 +56,6 @@ namespace HouseCleaningSchedule.Data
 						{
 							Id = 2,
 							Name = "Kitchen",
-							EstimatedCompletionTime = 0f,
 							PercentageDone = "0%",
 							CleaningTasks = new List<CleaningTask>
 							{
@@ -73,37 +63,29 @@ namespace HouseCleaningSchedule.Data
 								{
 									Id= 1,
 									Name = "Take out the trash",
-									EstimatedCompletionTime = 0.2f,
 									IsCompleted = false,
-									Description = "Empty every container",
-									Repeatability = 4
+									Description = "Empty every container"
 								},
 								new CleaningTask
 								{
 									Id= 2,
 									Name = "Vacuum",
-									EstimatedCompletionTime = 0.8f,
 									IsCompleted = false,
-									Description = "Regular vacuuming",
-									Repeatability = 5
+									Description = "Regular vacuuming"
 								},
 								new CleaningTask
 								{
 									Id= 3,
 									Name = "Wash the stove",
-									EstimatedCompletionTime = 0.4f,
 									IsCompleted = false,
-									Description = "With appropriate cleaning agents",
-									Repeatability = 7
+									Description = "With appropriate cleaning agents"
 								},
 								new CleaningTask
 								{
 									Id= 4,
 									Name = "Wash the floor",
-									EstimatedCompletionTime = 0.6f,
 									IsCompleted = false,
-									Description = "With a brush and a mop",
-									Repeatability = 7
+									Description = "With a brush and a mop"
 								}
 							}
 						},
@@ -111,7 +93,6 @@ namespace HouseCleaningSchedule.Data
 						{
 							Id = 3,
 							Name = "Living room",
-							EstimatedCompletionTime = 0f,
 							PercentageDone = "0%",
 							CleaningTasks = new List<CleaningTask>
 							{
@@ -119,37 +100,29 @@ namespace HouseCleaningSchedule.Data
 								{
 									Id= 1,
 									Name = "Dust off the couch",
-									EstimatedCompletionTime = 0.6f,
 									IsCompleted = false,
-									Description = "Refresh and dust",
-									Repeatability = 7
+									Description = "Refresh and dust"
 								},
 								new CleaningTask
 								{
 									Id= 2,
 									Name = "Vacuum",
-									EstimatedCompletionTime = 0.8f,
 									IsCompleted = false,
-									Description = "Regular vacuuming",
-									Repeatability = 5
+									Description = "Regular vacuuming"
 								},
 								new CleaningTask
 								{
 									Id= 3,
 									Name = "Clean the carpets",
-									EstimatedCompletionTime = 0.4f,
 									IsCompleted = false,
-									Description = "Every mirror in bathroom",
-									Repeatability = 7
+									Description = "Every mirror in bathroom"
 								},
 								new CleaningTask
 								{
 									Id= 4,
 									Name = "Dust off",
-									EstimatedCompletionTime = 1f,
 									IsCompleted = false,
-									Description = "Furnitures and electronics",
-									Repeatability = 7
+									Description = "Furnitures and electronics"
 								}
 							}
 						}

@@ -78,7 +78,6 @@ namespace HouseCleaningSchedule.ViewModel
 
 			Name = cleaningTask.Name;
 			Description = cleaningTask.Description;
-			Repeatability = cleaningTask.Repeatability;
 
 			EditTaskCommand = new DelegateCommand(EditTask, o => !HasErrors);
 			CancelEditTaskCommand = new DelegateCommand(CancelEditTask);
@@ -93,7 +92,6 @@ namespace HouseCleaningSchedule.ViewModel
 
 			cleaningTask.Name = Name;
 			cleaningTask.Description = Description;
-			cleaningTask.Repeatability = Repeatability;
 
 			TaskOperationFinished?.Invoke(this, EventArgs.Empty);
 		}
