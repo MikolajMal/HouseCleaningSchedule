@@ -6,16 +6,7 @@ namespace HouseCleaningSchedule.ViewModel
 {
 	class AddTaskViewModel : ValidationViewModelBase
 	{
-		public EventHandler<TaskEventArgs>? TaskOperationFinished;
-		public class TaskEventArgs : EventArgs
-		{
-			public CleaningTask? CleaningTask { get; }
-
-			public TaskEventArgs(CleaningTask? cleaningTask)
-			{
-				CleaningTask = cleaningTask;
-			}
-		}
+		public EventHandler<CleaningTask?>? TaskOperationFinished;
 
 		#region Properties
 		private string name = "";
@@ -59,7 +50,7 @@ namespace HouseCleaningSchedule.ViewModel
 			cleaningTask.Name = Name;
 			cleaningTask.Description = Description;
 
-			TaskOperationFinished?.Invoke(this, new TaskEventArgs(cleaningTask));
+			TaskOperationFinished?.Invoke(this, cleaningTask);
 		}
 
 		bool CanTaskBeCreated(object? parameter)
@@ -70,7 +61,7 @@ namespace HouseCleaningSchedule.ViewModel
 		public DelegateCommand CancelCommand { get; private set; }
 		void Cancel(object? parameter)
 		{
-			TaskOperationFinished?.Invoke(this, new TaskEventArgs(null));
+			TaskOperationFinished?.Invoke(this, null);
 		}
 	}
 }

@@ -82,11 +82,11 @@ namespace HouseCleaningSchedule.ViewModel
 			addTaskViewModel.TaskOperationFinished += OnTaskCreateFinished;
 		}
 
-		private void OnTaskCreateFinished(object? sender, AddTaskViewModel.TaskEventArgs e)
+		async void OnTaskCreateFinished(object? sender, CleaningTask? cleaningTask)
 		{
-			if (e.CleaningTask != null)
+			if (cleaningTask != null)
 			{
-				RoomViewModel.CleaningTasks.Add(e.CleaningTask);
+				RoomViewModel.CleaningTasks.Add(cleaningTask);
 				RoomViewModel.UpdatePercentageCommand.Execute(null);
 			}
 
