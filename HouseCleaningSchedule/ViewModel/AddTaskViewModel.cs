@@ -44,41 +44,6 @@ namespace HouseCleaningSchedule.ViewModel
 				OnPropertyChanged();
 			}
 		}
-
-		private int repeatability;
-		public int Repeatability
-		{
-			get => repeatability;
-			set
-			{
-				repeatability = value;
-				OnPropertyChanged();
-				if (repeatability < 1)
-				{
-					AddError("Repeatability must by at least 1.");
-					Days = "";
-				}
-				else
-				{
-					ClearErrors();
-					if (repeatability == 1) Days = "day.";
-					else Days = "days.";
-				}
-				CreateTaskCommand?.RaiseCanExecuteChanged();
-			}
-		}
-
-		private string days = "days.";
-		public string Days
-		{
-			get => days;
-			set
-			{
-				days = value;
-				OnPropertyChanged();
-			}
-		}
-
 		#endregion
 
 		public AddTaskViewModel()
@@ -99,7 +64,7 @@ namespace HouseCleaningSchedule.ViewModel
 
 		bool CanTaskBeCreated(object? parameter)
 		{
-			return !HasErrors && !string.IsNullOrEmpty(Name) && Repeatability > 0;
+			return !HasErrors && !string.IsNullOrEmpty(Name);
 		}
 
 		public DelegateCommand CancelCommand { get; private set; }

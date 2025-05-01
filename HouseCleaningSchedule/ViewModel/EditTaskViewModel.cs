@@ -35,42 +35,6 @@ namespace HouseCleaningSchedule.ViewModel
 			}
 		}
 
-		private int repeatability;
-		public int Repeatability
-		{
-			get => repeatability;
-			set
-			{
-				repeatability = value;
-				OnPropertyChanged();
-				if (repeatability < 1)
-				{
-					AddError("Repeatability must by at least 1.");
-					Days = "";
-				}
-				else
-				{
-					ClearErrors();
-					if (repeatability == 1) Days = "day.";
-					else Days = "days.";
-				}
-
-				EditTaskCommand?.RaiseCanExecuteChanged();
-			}
-		}
-
-		private string days = "days.";
-		public string Days
-		{
-			get => days;
-			set
-			{
-				days = value;
-				OnPropertyChanged();
-			}
-		}
-
-
 		public EditTaskViewModel(object? taskToEdit)
 		{
 			cleaningTask = taskToEdit as CleaningTask;
