@@ -1,4 +1,5 @@
 ﻿using HouseCleaningSchedule.Command;
+using HouseCleaningSchedule.Data;
 using HouseCleaningSchedule.Model;
 using System.Collections.ObjectModel;
 
@@ -6,6 +7,8 @@ namespace HouseCleaningSchedule.ViewModel
 {
 	public class RoomViewModel : ViewModelBase
 	{
+		IHouseRepository houseRepository;
+
 		Room room = new();
 		public Room Room
 		{
@@ -47,8 +50,10 @@ namespace HouseCleaningSchedule.ViewModel
 		}
 
 
-		public RoomViewModel(Room room)
+		public RoomViewModel(Room room, IHouseRepository repository)
 		{
+			houseRepository = repository;
+
 			Room = room;
 
 			DeleteTaskCommand = new DelegateCommand(DeleteTask, o => SelectedTask != null);
@@ -56,11 +61,15 @@ namespace HouseCleaningSchedule.ViewModel
 		}
 
 		public DelegateCommand DeleteTaskCommand { get; private set; }
-		void DeleteTask(object? parameter)
+		async void DeleteTask(object? parameter)
 		{
 			if (SelectedTask == null) return;
+			await houseRepository.RemoveCleaningTaskAsync(SelectedTask);
+
 			CleaningTasks.Remove(SelectedTask);
+
 			SelectedTask = null;
+
 
 			UpdatePercentageCommand.Execute(null);
 		}
@@ -76,6 +85,8 @@ namespace HouseCleaningSchedule.ViewModel
 
 			if (CleaningTasks.Count == 0) PercentageDone = "0";
 			else PercentageDone = ((int)(completedTaskCount / CleaningTasks.Count * 100f)).ToString();
+
+			houseRepository.SaveChangesAsync();
 		}
 	}
 }

@@ -2,6 +2,7 @@
 using HouseCleaningSchedule.Data;
 using HouseCleaningSchedule.Model;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -20,24 +21,39 @@ namespace HouseCleaningSchedule.ViewModel
 		}
 
 		public DelegateCommand DeleteRoomCommand { get; private set; }
-		void DeleteRoom(object? parameter)
+		async void DeleteRoom(object? parameter)
 		{
 			Room? room = parameter as Room;
 
-			if (room != null) Rooms.Remove(room);
+			if (room != null)
+			{
+				try
+				{
+					await HouseRepository.RemoveRoomAsync(room);
+					Rooms.Remove(room);
+				}
+				catch (Exception ex)
+				{
+					Console.WriteLine($"Error while removing room: {ex.Message}");
+				}
+			}
 		}
 
 		public override async Task LoadAsync()
 		{
 			if (Rooms.Count > 0) return;
 
-			var rooms = await HouseRepository.GetAllRooms();
-
-			if (rooms == null) return;
-
-			foreach (Room room in rooms)
+			try
 			{
-				Rooms.Add(room);
+				IEnumerable<Room> rooms = await HouseRepository.GetAllRoomsAndTasks();
+
+				if (rooms == null) return;
+
+				Rooms = new ObservableCollection<Room>(rooms);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error while retrieving rooms: {ex.Message}");
 			}
 		}
 	}

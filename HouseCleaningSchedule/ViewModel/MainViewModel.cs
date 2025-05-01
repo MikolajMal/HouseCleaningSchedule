@@ -44,7 +44,7 @@ namespace HouseCleaningSchedule.ViewModel
 		{
 			if (parameter is Room selectedRoom)
 			{
-				RoomViewModel ??= new RoomViewModel(selectedRoom);
+				RoomViewModel ??= new RoomViewModel(selectedRoom, HouseRepository);
 				RoomViewModel.Room = selectedRoom;
 				SelectedViewModel = RoomViewModel;
 			}
@@ -66,9 +66,20 @@ namespace HouseCleaningSchedule.ViewModel
 			roomEditorViewModel.RoomOperationFinished += OnRoomEditFinished;
 		}
 
-		void OnRoomEditFinished(object? sender, Room? room)
+		async void OnRoomEditFinished(object? sender, Room? room)
 		{
-			if (room != null) HouseViewModel.Rooms.Add(room);
+			if (room != null)
+			{
+				if (HouseViewModel.Rooms.Contains(room))
+				{
+					await HouseRepository.SaveChangesAsync();
+				}
+				else
+				{
+					HouseViewModel.Rooms.Add(room);
+					await HouseRepository.AddRoomAsync(room);
+				}
+			}
 
 			SelectedViewModel = HouseViewModel;
 		}
@@ -88,6 +99,7 @@ namespace HouseCleaningSchedule.ViewModel
 			{
 				RoomViewModel.CleaningTasks.Add(cleaningTask);
 				RoomViewModel.UpdatePercentageCommand.Execute(null);
+				await HouseRepository.AddCleaningTaskAsync(RoomViewModel.Room.Id, cleaningTask);
 			}
 
 			SelectedViewModel = RoomViewModel;
@@ -105,8 +117,9 @@ namespace HouseCleaningSchedule.ViewModel
 			}
 		}
 
-		void OnTaskEditFinished(object? sender, EventArgs e)
+		async void OnTaskEditFinished(object? sender, EventArgs e)
 		{
+			await HouseRepository.SaveChangesAsync();
 			SelectedViewModel = RoomViewModel;
 		}
 	}

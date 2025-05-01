@@ -64,21 +64,22 @@ namespace HouseCleaningSchedule.ViewModel
 		public DelegateCommand ConfirmCommand { get; private set; }
 		void Confirm(object? parameter)
 		{
+			Room? room = currentRoom;
 			if (currentRoom != null)
 			{
 				currentRoom.Name = RoomName;
-				RoomOperationFinished?.Invoke(this, null);
 			}
 			else
 			{
-				Room room = new Room()
+				room = new Room()
 				{
 					Name = RoomName,
 					CleaningTasks = new(),
 					PercentageDone = "0%"
 				};
-				RoomOperationFinished?.Invoke(this, room);
 			}
+
+			RoomOperationFinished?.Invoke(this, room);
 
 			currentRoom = null;
 		}
