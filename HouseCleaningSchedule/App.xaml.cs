@@ -1,7 +1,7 @@
 ﻿using HouseCleaningSchedule.Data;
+using HouseCleaningSchedule.Model;
 using HouseCleaningSchedule.ViewModel;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Windows;
 
 namespace HouseCleaningSchedule
@@ -20,12 +20,14 @@ namespace HouseCleaningSchedule
 
 		private void ConfigureServices(ServiceCollection services)
 		{
+			services.AddDbContext<HouseDbContext>();
+
 			services.AddTransient<MainWindow>();
 
 			services.AddTransient<MainViewModel>();
 			services.AddTransient<HouseViewModel>();
 
-			services.AddSingleton<IHouseRepository, MockHouseRepository>();
+			services.AddSingleton<IHouseRepository, HouseRepository>();
 		}
 
 		protected override void OnStartup(StartupEventArgs e)

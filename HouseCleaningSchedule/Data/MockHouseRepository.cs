@@ -9,7 +9,7 @@ namespace HouseCleaningSchedule.Data
 {
 	public class MockHouseRepository : IHouseRepository
 	{
-		public async Task<IEnumerable<Room>> GetAllRooms()
+		public async Task<IEnumerable<Room>> GetAllRoomsAndTasks()
 		{
 			await Task.Delay(100);
 
@@ -128,5 +128,12 @@ namespace HouseCleaningSchedule.Data
 						}
 			};
 		}
+		public async Task SaveChangesAsync() => await Task.Delay(100);
+
+		public async Task AddRoomAsync(Room room) => await Task.Delay(100);
+		public async Task RemoveRoomAsync(Room room) => await Task.Delay(100);
+
+		public async Task AddCleaningTaskAsync(int roomID, CleaningTask cleaningTask) => await Task.Delay(100);
+		public async Task RemoveCleaningTaskAsync(CleaningTask cleaningTask) => await Task.Delay(100);
 	}
 }
