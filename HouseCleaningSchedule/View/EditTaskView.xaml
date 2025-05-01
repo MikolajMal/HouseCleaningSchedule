@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <converter:StringToIntConverter x:Key="StringToIntConverter"/>
     </UserControl.Resources>
-    <Grid Width="250" Height="200" Margin="50">
+    <Grid Width="250" Height="250" Margin="50">
         <Border CornerRadius="20" BorderThickness="2" BorderBrush="{StaticResource BorderColorBrush}"  Background="{StaticResource MainBackgroundBrush}">
             <StackPanel>
                 <TextBlock Text="Edit task" HorizontalAlignment="Center" FontSize="18" Margin="12"/>

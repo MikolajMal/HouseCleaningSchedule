@@ -22,7 +22,6 @@
                     <TextBlock Text="{Binding Description}" Grid.Row="1" Foreground="{StaticResource SecondaryTextBrush}" Margin="20,2"/>
                     <CheckBox IsChecked="{Binding IsCompleted}" Command="{Binding DataContext.UpdatePercentageCommand, RelativeSource={RelativeSource AncestorType=ListBox}}" Grid.Column="1" Grid.RowSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="40,2"/>
                 </Grid>
-
             </Border>
         </DataTemplate>
     </UserControl.Resources>
