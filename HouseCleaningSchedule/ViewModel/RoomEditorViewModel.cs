@@ -1,13 +1,16 @@
 ﻿using HouseCleaningSchedule.Command;
+using HouseCleaningSchedule.Data;
 using HouseCleaningSchedule.Model;
 using System;
-using static HouseCleaningSchedule.ViewModel.AddTaskViewModel;
+using System.Collections.Generic;
 
 namespace HouseCleaningSchedule.ViewModel
 {
 	class RoomEditorViewModel : ValidationViewModelBase
 	{
-		public EventHandler<Room?>? RoomOperationFinished;
+		IHouseRepository houseRepository;
+
+		public EventHandler? RoomOperationFinished;
 
 		private string viewTitle = string.Empty;
 		public string ViewTitle
@@ -39,8 +42,10 @@ namespace HouseCleaningSchedule.ViewModel
 
 		Room? currentRoom = null;
 
-		public RoomEditorViewModel(Room? room)
+		public RoomEditorViewModel(Room? room, IHouseRepository repository)
 		{
+			houseRepository = repository;
+
 			if (room != null)
 			{
 				currentRoom = room;
@@ -62,12 +67,14 @@ namespace HouseCleaningSchedule.ViewModel
 		}
 
 		public DelegateCommand ConfirmCommand { get; private set; }
-		void Confirm(object? parameter)
+		async void Confirm(object? parameter)
 		{
 			Room? room = currentRoom;
+			List<Room> rooms = new();
 			if (currentRoom != null)
 			{
 				currentRoom.Name = RoomName;
+				await houseRepository.SaveChangesAsync();
 			}
 			else
 			{
@@ -77,9 +84,11 @@ namespace HouseCleaningSchedule.ViewModel
 					CleaningTasks = new(),
 					PercentageDone = "0%"
 				};
+
+				await houseRepository.AddRoomAsync(room);
 			}
 
-			RoomOperationFinished?.Invoke(this, room);
+			RoomOperationFinished?.Invoke(this, EventArgs.Empty);
 
 			currentRoom = null;
 		}
@@ -87,7 +96,7 @@ namespace HouseCleaningSchedule.ViewModel
 		public DelegateCommand CancelCommand { get; private set; }
 		void Cancel(object? parameter)
 		{
-			RoomOperationFinished?.Invoke(this, null);
+			RoomOperationFinished?.Invoke(this, EventArgs.Empty);
 		}
 	}
 }

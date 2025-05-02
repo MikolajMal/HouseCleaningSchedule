@@ -60,27 +60,16 @@ namespace HouseCleaningSchedule.ViewModel
 		void OpenRoomEditor(object? parameter)
 		{
 			Room? room = parameter as Room;
-			RoomEditorViewModel roomEditorViewModel = new RoomEditorViewModel(room);
+			RoomEditorViewModel roomEditorViewModel = new RoomEditorViewModel(room, HouseRepository);
 			SelectedViewModel = roomEditorViewModel;
 
 			roomEditorViewModel.RoomOperationFinished += OnRoomEditFinished;
 		}
 
-		async void OnRoomEditFinished(object? sender, Room? room)
+		async void OnRoomEditFinished(object? sender, EventArgs e)
 		{
-			if (room != null)
-			{
-				if (HouseViewModel.Rooms.Contains(room))
-				{
-					await HouseRepository.SaveChangesAsync();
-				}
-				else
-				{
-					HouseViewModel.Rooms.Add(room);
-					await HouseRepository.AddRoomAsync(room);
-				}
-			}
-
+			var rooms = await HouseRepository.GetAllRoomsAndTasks();
+			HouseViewModel.Rooms = new(rooms);
 			SelectedViewModel = HouseViewModel;
 		}
 
