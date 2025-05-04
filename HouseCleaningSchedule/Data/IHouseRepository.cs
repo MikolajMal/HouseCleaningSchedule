@@ -7,6 +7,7 @@ namespace HouseCleaningSchedule.Data
     public interface IHouseRepository
     {
         Task<IEnumerable<Room>> GetAllRoomsAndTasks();
+        Task<IEnumerable<CleaningTask>> GetAllTasks(int roomId);
 		Task SaveChangesAsync();
 
         Task AddRoomAsync(Room room);

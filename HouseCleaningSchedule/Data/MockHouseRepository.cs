@@ -128,6 +128,7 @@ namespace HouseCleaningSchedule.Data
 						}
 			};
 		}
+		public async Task<IEnumerable<CleaningTask>> GetAllTasks(int roomId) => null;
 		public async Task SaveChangesAsync() => await Task.Delay(100);
 
 		public async Task AddRoomAsync(Room room) => await Task.Delay(100);

@@ -19,6 +19,8 @@ namespace HouseCleaningSchedule.Data
 
 		public async Task<IEnumerable<Room>> GetAllRoomsAndTasks() => await houseDbContext.Rooms.Include(r => r.CleaningTasks).ToListAsync();
 
+		public async Task<IEnumerable<CleaningTask>> GetAllTasks(int roomId) => await houseDbContext.CleaningTasks.Where(ct => ct.RoomId == roomId).ToListAsync();
+
 		public async Task SaveChangesAsync()
 		{
 			await houseDbContext.SaveChangesAsync();
