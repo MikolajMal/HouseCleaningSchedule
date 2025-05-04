@@ -1,4 +1,5 @@
 ﻿using HouseCleaningSchedule.Command;
+using HouseCleaningSchedule.Data;
 using HouseCleaningSchedule.Model;
 using System;
 
@@ -6,7 +7,10 @@ namespace HouseCleaningSchedule.ViewModel
 {
 	class AddTaskViewModel : ValidationViewModelBase
 	{
-		public EventHandler<CleaningTask?>? TaskOperationFinished;
+		IHouseRepository houseRepository;
+		int roomId;
+
+		public EventHandler? TaskOperationFinished;
 
 		#region Properties
 		private string name = "";
@@ -37,20 +41,26 @@ namespace HouseCleaningSchedule.ViewModel
 		}
 		#endregion
 
-		public AddTaskViewModel()
+		public AddTaskViewModel(int currentRoomId, IHouseRepository repository)
 		{
+			roomId = currentRoomId;
+
+			houseRepository = repository;
+
 			CreateTaskCommand = new DelegateCommand(CreateTask, CanTaskBeCreated);
 			CancelCommand = new DelegateCommand(Cancel);
 		}
 
 		public DelegateCommand CreateTaskCommand { get; private set; }
-		void CreateTask(object? parameter)
+		async void CreateTask(object? parameter)
 		{
 			CleaningTask cleaningTask = new CleaningTask();
 			cleaningTask.Name = Name;
 			cleaningTask.Description = Description;
 
-			TaskOperationFinished?.Invoke(this, cleaningTask);
+			await houseRepository.AddCleaningTaskAsync(roomId, cleaningTask);
+
+			TaskOperationFinished?.Invoke(this, EventArgs.Empty);
 		}
 
 		bool CanTaskBeCreated(object? parameter)

@@ -76,30 +76,18 @@ namespace HouseCleaningSchedule.ViewModel
 		public DelegateCommand AddNewTaskCommand { get; private set; }
 		void AddNewTask(object? parameter)
 		{
-			AddTaskViewModel addTaskViewModel = new AddTaskViewModel();
+			AddTaskViewModel addTaskViewModel = new AddTaskViewModel(RoomViewModel.Room.Id, HouseRepository);
 			SelectedViewModel = addTaskViewModel;
 
-			addTaskViewModel.TaskOperationFinished += OnTaskCreateFinished;
-		}
-
-		async void OnTaskCreateFinished(object? sender, CleaningTask? cleaningTask)
-		{
-			if (cleaningTask != null)
-			{
-				RoomViewModel.CleaningTasks.Add(cleaningTask);
-				RoomViewModel.UpdatePercentageCommand.Execute(null);
-				await HouseRepository.AddCleaningTaskAsync(RoomViewModel.Room.Id, cleaningTask);
-			}
-
-			SelectedViewModel = RoomViewModel;
+			addTaskViewModel.TaskOperationFinished += OnTaskEditFinished;
 		}
 
 		public DelegateCommand EditTaskCommand { get; private set; }
 		void EditTask(object? parameter)
 		{
-			if (parameter != null)
+			if (parameter != null && parameter is CleaningTask)
 			{
-				EditTaskViewModel editTaskViewModel = new EditTaskViewModel(parameter);
+				EditTaskViewModel editTaskViewModel = new EditTaskViewModel((CleaningTask)parameter, HouseRepository);
 				SelectedViewModel = editTaskViewModel;
 
 				editTaskViewModel.TaskOperationFinished += OnTaskEditFinished;
@@ -108,7 +96,8 @@ namespace HouseCleaningSchedule.ViewModel
 
 		async void OnTaskEditFinished(object? sender, EventArgs e)
 		{
-			await HouseRepository.SaveChangesAsync();
+			var rooms = await HouseRepository.GetAllTasks(RoomViewModel.Room.Id);
+			RoomViewModel.CleaningTasks = new(rooms);
 			SelectedViewModel = RoomViewModel;
 		}
 	}

@@ -38,7 +38,7 @@ namespace HouseCleaningSchedule.ViewModel
 			}
 		}
 
-		public ObservableCollection<CleaningTask> CleaningTasks { get; private set; } = new();
+		public ObservableCollection<CleaningTask> CleaningTasks { get; set; } = new();
 
 		public string PercentageDone
 		{

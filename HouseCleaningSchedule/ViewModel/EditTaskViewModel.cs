@@ -1,4 +1,5 @@
 ﻿using HouseCleaningSchedule.Command;
+using HouseCleaningSchedule.Data;
 using HouseCleaningSchedule.Model;
 using System;
 
@@ -6,6 +7,8 @@ namespace HouseCleaningSchedule.ViewModel
 {
 	public class EditTaskViewModel : ValidationViewModelBase
 	{
+		IHouseRepository houseRepository;
+
 		CleaningTask? cleaningTask;
 
 		private string name = "";
@@ -35,9 +38,11 @@ namespace HouseCleaningSchedule.ViewModel
 			}
 		}
 
-		public EditTaskViewModel(object? taskToEdit)
+		public EditTaskViewModel(CleaningTask taskToEdit, IHouseRepository repository)
 		{
-			cleaningTask = taskToEdit as CleaningTask;
+			houseRepository = repository;
+
+			cleaningTask = taskToEdit;
 			if (cleaningTask == null) return;
 
 			Name = cleaningTask.Name;
@@ -50,12 +55,14 @@ namespace HouseCleaningSchedule.ViewModel
 		public EventHandler? TaskOperationFinished;
 
 		public DelegateCommand EditTaskCommand { get; private set; }
-		void EditTask(object? parameter)
+		async void EditTask(object? parameter)
 		{
 			if(cleaningTask== null) return;
 
 			cleaningTask.Name = Name;
 			cleaningTask.Description = Description;
+
+			await houseRepository.SaveChangesAsync();
 
 			TaskOperationFinished?.Invoke(this, EventArgs.Empty);
 		}
